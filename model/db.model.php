@@ -2,37 +2,36 @@
 
 include 'config.model.php';
 
-
 class DB{
     // proprietà
     private $connessione;
-
     function __construct() {
-        $this->connessione = null;
     }
     // metodi 
     private function connect(){
-        try{
-            $this->connessione = new PDO("mysql:host=localhost:3306;dbname=test","root","");
-        }catch(Exception $e){ // Exception ?? da vedere
-            echo "Si è verificato un'eccezione durante la connessione: ". $e->getMessage();
+        // se session_start() è = 1 --> vuol dire che la sessione già esiste
+
+            try{
+                $this->connessione = mysqli_connect(HOST, USER, PASSWORD, DB_NAME);
+                if ($this->connessione->connect_error) {
+                    die("Errore durante la connessione ". $this->connessione->connect_error);
+                }
+                return $this->connessione;
+            }catch(Exception $e){ // Exception ?? da vedere
+                echo "Si è verificato un'eccezione durante la connessione: ". $e->getMessage();
+                
+            }
         }
-        return $this->connessione;
+    
+    // private function getUser(){
+    //     $sql = "SELECT * FROM user";
+    //     $this->connectPublic();
+    //     $result = mysqli_query($this->connessione,$sql);
+    //     print_r($result);
+    // }
+    function connectPublic(){
+        return $this->connect();
     }
-    private function users(){
-        try{
-            $sql = $this->connessione->query("SELECT * FROM your_table");
-            $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
-        }catch(PDOException $e){
-            echo "Si è verificato un'eccezione durante la connessione: ". $e->getMessage();
-        };
-        var_dump($rows);
-    }
-    function getUsers(){
-        $this->users();
-    }
-    function getConnection(){
-        $this->connect();
-    }    
+      
 
 }
