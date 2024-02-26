@@ -1,3 +1,12 @@
+<?php
+  session_start();
+  include_once "../controller/login.controller.php";
+  $controller = new User();
+  
+  if(isset($_GET['error'])){
+    $error = $_GET['error'];
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,6 +58,7 @@
               <a class="nav-link disabled" aria-disabled="true">Disabled</a>
             </li>
           </ul>
+          <!-- <h3>error</h3> -->
           <form class="d-flex" role="search" action="./login.php">
             <button class="btn btn-outline-success" type="submit">Login</button>
           </form>
@@ -96,8 +106,15 @@
       <input type="email" id="email" name="email" required><br><br>
       <label for="password">Password:</label>
       <input type="password" id="password" name="password"><br><br>
-      <input type="submit" value="click">
+      <?php 
+        if(isset($error)){
+          echo "<h3 class='text-danger'>Email or Password Invalid</h3>";
+        }
+        print_r($_SESSION['logged_in']);
+      ?>
+      <input type="submit" value="Submit" class="btn btn-outline-dark ms-2">
     </form>
+    <a href="./signup.php" class='btn btn-outline-dark mt-2 ms-2'>Sign Up</a>
     
     <!-- End of body -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
