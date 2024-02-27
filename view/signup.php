@@ -43,6 +43,7 @@ include_once "../controller/InitialCheck.php";
     </nav>
     <!-- Inizio Pagina -->
     <h1>Sei In Sign Up</h1>
+    <p>prova a caso per git</p>
     <!-- Form -->
     <form action="" method="post"><!-- Inserire una pagina che si occuperà di inviare i dati se sono giusti o di reindirizzarti verso la signup.php page se i dati non sono corretti -->
       <div class="mb-3">
